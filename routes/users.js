@@ -8,7 +8,7 @@ var jwt = require("jsonwebtoken");
 const authenticateJWT = require("../middleware/authenticateJWT");
 
 router.post("/register", async function (req, res, next) {
-  let name = req.body.name;
+  let name = req.body.fullName;
   let email = req.body.email;
   let password = req.body.password;
 
