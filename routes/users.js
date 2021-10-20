@@ -70,4 +70,5 @@ router.post("/login", async function (req, res, next) {
 
   res.json({ token: token });
 });
+
 module.exports = router;
