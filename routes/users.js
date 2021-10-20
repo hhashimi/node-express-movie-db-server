@@ -5,6 +5,7 @@ var bcrypt = require("bcryptjs");
 const Boom = require("@hapi/boom");
 var validator = require("validator");
 var jwt = require("jsonwebtoken");
+const authenticateJWT = require("../middleware/authenticateJWT");
 
 router.post("/register", async function (req, res, next) {
   let name = req.body.name;
@@ -69,6 +70,13 @@ router.post("/login", async function (req, res, next) {
   );
 
   res.json({ token: token });
+});
+
+router.get("/profile", authenticateJWT, async function (req, res, next) {
+  const user = await User.findOne({ email: req.user });
+  user.password = undefined;
+
+  return res.json(user);
 });
 
 module.exports = router;

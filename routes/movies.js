@@ -17,7 +17,6 @@ router.post(
 
     // find the user
     const user = await User.findOne({ email: req.user });
-    user.password = undefined;
 
     // do not add movie if it already exists in favorites
     let movieExists = user.movies.includes(movieId);
@@ -27,6 +26,7 @@ router.post(
 
     await user.save();
 
+    user.password = undefined;
     return res.json(user);
   }
 );
